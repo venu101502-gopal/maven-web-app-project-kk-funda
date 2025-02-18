@@ -97,3 +97,33 @@ server {
     return 301 https://$host$request_uri;
 }
 
+#####################################################
+
+root@sutisrm-192-168-0-244:~# vim /etc/systemd/system/tomcat.service
+[Unit]
+Description=Tomcat
+After=network.target
+[Service]
+Type=forking
+User=sutijvm
+WorkingDirectory=/opt/sutisoftapps/tomcat
+#Environment=JRE_HOME=
+Environment=JAVA_HOME=/opt/jdk-17.0.4.1
+Environment=CLASSPATH=/opt/sutisoftapps/tomcat/bin/bootstrap.jar:/opt/tomcat-juli.jar
+Environment=CATALINA_HOME=/opt/sutisoftapps/tomcat
+Environment=CATALINE_BASE=/opt/sutisoftapps/tomcat
+ExecStart=/opt/sutisoftapps/tomcat/bin/startup.sh
+ExecStartPre=/bin/sleep 30
+ExecStop=/opt/sutisoftapps/tomcat/bin/shutdown.sh
+SyslogIdentifier=tomcat-%i
+[Install]
+WantedBy=multi-user.target
+
+###########################################################
+JAVA_HOME=/opt/sutisoftapps/jdk-17.0.4.1 ; export JAVA_HOME
+CATALINA_HOME=/opt/sutisoftapps/tomcat ; export CATALINA_HOME
+#JAVA_OPTS="-server -Xms1024m -Xmx2048m -Xss1g"
+#JAVA_OPTS="-server -Xms512m -Xmx2048m -Xss1g"
+JAVA_OPTS="-server -Xms1024m -Xmx4096m"
+UMASK="0022";export UMASK
+#########################################################
