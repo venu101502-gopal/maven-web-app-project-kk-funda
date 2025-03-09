@@ -104,7 +104,7 @@
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>KK FUNDA Snapshot Nexus Repository </name>
-	      <url>http://65.0.100.127:8081/repository/venu-release/</url>
+	      <url>http://65.0.100.127:8081/repository/venu-snapshot/</url>
 	    </snapshotRepository>
 	    
 	</distributionManagement>
